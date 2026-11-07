@@ -1,0 +1,20 @@
+{
+  "topic_id": 45548241554884888,
+  "type": "q&a",
+  "create_time": "2026-11-06T10:00:00.000+0800",
+  "digested": false,
+  "likes_count": 2,
+  "comments_count": 1,
+  "question": {
+    "owner": {
+      "name": "提问者"
+    },
+    "text": "问题正文？"
+  },
+  "answer": {
+    "owner": {
+      "name": "回答者"
+    },
+    "text": "回答正文，带**重要**内容。"
+  }
+}

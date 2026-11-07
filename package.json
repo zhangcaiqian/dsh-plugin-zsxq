@@ -1,0 +1,60 @@
+{
+  "name": "dsh-plugin-zsxq",
+  "version": "0.1.0",
+  "description": "知识星球知识库工具：同步帖子与附件、抽取 docx/PDF 正文、重建索引、检索与自检，纯 JS 无 Python 依赖",
+  "type": "module",
+  "main": "src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src/**/*.mjs",
+    "assets/pdf/**",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "zsxq",
+    "知识星球",
+    "knowledge-base",
+    "docx",
+    "pdf"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "dsh": ">=0.2.0-rc.2 <0.2.1-0 || >=0.2.1-rc.1 <0.3.0-0",
+    "node": ">=20"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.5",
+    "@deepseek-ai/dsh-tools": ">=0.2.0-rc.2 <0.2.1-0 || >=0.2.1-rc.1 <0.3.0-0",
+    "@deepseek-ai/schemastery": "^3.18.1"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "fast-xml-parser": "^5.0.0",
+    "json-bigint": "^1.0.0",
+    "jszip": "^3.10.1",
+    "unpdf": "^2.1.0",
+    "yaml": "^2.5.0"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "golden": "node scripts/golden.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhangcaiqian/dsh-plugin-zsxq.git"
+  },
+  "author": "zhangcaiqian",
+  "license": "MIT"
+}

@@ -1,0 +1,35 @@
+{
+  "topic_id": 55522284425488584,
+  "type": "talk",
+  "create_time": "2026-11-07T09:30:00.000+0800",
+  "digested": true,
+  "likes_count": 12,
+  "comments_count": 3,
+  "title": "示例帖子：带标签、附件与语音",
+  "talk": {
+    "owner": {
+      "name": "示例作者"
+    },
+    "text": "这是一段示例正文。<e type=\"hashtag\" hid=\"1\" title=\"%23示例标签%23\" /> 还有<e type=\"text_bold\" title=\"加粗文字\" />和<e type=\"web\" href=\"https%3A%2F%2Fexample.com\" title=\"示例链接\" />。",
+    "images": [
+      {
+        "large": {
+          "url": "https://example.com/image.png"
+        }
+      }
+    ],
+    "files": [
+      {
+        "file_id": "100000000000001",
+        "name": "note.docx",
+        "size": 2048
+      }
+    ]
+  },
+  "content_voice": {
+    "file_id": "100000000000002",
+    "name": "note.mp3",
+    "duration": 125,
+    "size": 512000
+  }
+}
