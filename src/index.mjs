@@ -14,7 +14,7 @@ import { join } from 'node:path'
 import z from '@deepseek-ai/schemastery'
 import { defineTool } from '@deepseek-ai/dsh-tools'
 
-import { ZsxqClient, ZsxqError } from './api.mjs'
+import { normalizeGroup, ZsxqClient, ZsxqError } from './api.mjs'
 import { buildIndexFiles } from './index-build.mjs'
 import { searchIndex } from './search.mjs'
 import {
@@ -515,6 +515,7 @@ export function apply(ctx, rawConfig) {
       const paths = dataPaths(root)
       const checks = []
       const actions = []
+      let planetsForReport = []
 
       checks.push({
         name: 'dataDir',
@@ -543,14 +544,18 @@ export function apply(ctx, rawConfig) {
           const groups = await client.getGroups()
           checks.push({ name: 'cookie', ok: true, detail: `Cookie 有效，可访问 ${groups.length} 个星球` })
           const configured = loaded.channels ?? {}
-          const missing = groups
-            .map((item) => ({ id: String(item?.group?.group_id ?? ''), name: item?.group?.name ?? '' }))
-            .filter((group) => !Object.values(configured).some((value) => String(value?.group_id ?? '') === group.id))
+          const configuredIds = new Set(Object.values(configured).map((value) => String(value?.group_id ?? '')))
+          const planets = groups
+            .map(normalizeGroup)
+            .filter((group) => group.id.length > 0)
+            .map((group) => ({ ...group, configured: configuredIds.has(group.id) }))
+          const missing = planets.filter((group) => !group.configured)
           if (Object.keys(configured).length === 0) {
-            actions.push('channels 为空：把上面列出的星球按 {"channels":{"my-channel":{"name":"…","group_id":"…","default_scope":"digests"}}} 填进 config.json')
+            actions.push('channels 为空：从返回的 planets 里挑要同步的星球，按 {"channels":{"my-channel":{"name":"…","group_id":"…","default_scope":"digests"}}} 填进 config.json')
           } else if (missing.length > 0) {
-            actions.push(`还有 ${missing.length} 个可访问星球未配置：${missing.map((group) => group.name).join('、')}`)
+            actions.push(`还有 ${missing.length} 个可访问星球未配置：${missing.map((group) => group.name || group.id).join('、')}`)
           }
+          planetsForReport = planets
         } catch (error) {
           const code = error instanceof ZsxqError ? error.code : 'ZSXQ_NETWORK_ERROR'
           checks.push({ name: 'cookie', ok: false, detail: `${code}: ${messageOf(error)}` })
@@ -579,6 +584,7 @@ export function apply(ctx, rawConfig) {
         ok: checks.every((check) => check.ok),
         dataDir: root,
         checks,
+        planets: planetsForReport,
         warnings: inventory.nonArticle > 0
           ? [`channels/ 下有 ${inventory.nonArticle} 个无 frontmatter 的手写 md（不计入索引）`]
           : [],

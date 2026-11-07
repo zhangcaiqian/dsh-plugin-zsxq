@@ -53,6 +53,23 @@ export function sleep(ms, signal) {
   })
 }
 
+/**
+ * 归一化 `/v2/groups` 的星球条目。
+ *
+ * 现行 API 返回**扁平** group 对象（`group_id` / `name` 直接在顶层）；
+ * 某些封装或旧响应会多包一层 `group`。两种形态都兼容。
+ *
+ * @param item 单个条目。
+ * @returns `{ id, name }`，缺失字段为空字符串。
+ */
+export function normalizeGroup(item) {
+  const group = item?.group ?? item ?? {}
+  return {
+    id: String(group.group_id ?? ''),
+    name: typeof group.name === 'string' ? group.name : '',
+  }
+}
+
 /** 知识星球 API 客户端。 */
 export class ZsxqClient {
   /**
