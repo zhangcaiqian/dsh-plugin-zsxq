@@ -167,6 +167,7 @@ the volatile fields:
 
 ```yaml
 - id: zsxq-tools
+  name: dsh-plugin-zsxq     # required: a patch row needs `name` to hit the bundle's row
   config:
     dataDir: /Users/you/knowledge-base
 ```

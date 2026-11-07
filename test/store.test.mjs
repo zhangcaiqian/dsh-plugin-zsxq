@@ -34,6 +34,18 @@ test('ZSXQ_BASE_DIR 优先于默认目录', async () => {
   }
 })
 
+test('config.dataDir 优先于默认目录（且展开 ~）', async () => {
+  const previous = process.env.ZSXQ_BASE_DIR
+  delete process.env.ZSXQ_BASE_DIR
+  try {
+    const root = await resolveDataDir(undefined, undefined, { dataDir: '~/custom-kb' })
+    assert.ok(root.endsWith('/custom-kb'))
+    assert.ok(!root.startsWith('~'))
+  } finally {
+    if (previous !== undefined) process.env.ZSXQ_BASE_DIR = previous
+  }
+})
+
 test('expandHome 展开 ~/', () => {
   assert.ok(!expandHome('~/kb').startsWith('~'))
 })

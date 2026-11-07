@@ -169,6 +169,7 @@ dsh plugin --profile web add github:zhangcaiqian/zsxq-skill
 
 ```yaml
 - id: zsxq-tools
+  name: dsh-plugin-zsxq     # 必须写 name，否则 patch 行不会命中 bundle 里的行
   config:
     dataDir: /Users/you/knowledge-base
 ```

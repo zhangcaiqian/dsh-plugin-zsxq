@@ -483,8 +483,8 @@ export function apply(ctx, rawConfig) {
     output: JSON_OUTPUT,
     timeoutMs: config.indexTimeoutMs,
     isConcurrencySafe: () => false,
-    async execute(_args, _exec) {
-      const root = await resolveDataDir(ctx, undefined, config)
+    async execute(_args, exec) {
+      const root = await resolveDataDir(ctx, exec, config)
       const startedAt = Date.now()
       const { files, stats } = await buildIndexFiles(root)
       for (const file of files) {

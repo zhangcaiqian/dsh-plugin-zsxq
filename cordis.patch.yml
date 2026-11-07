@@ -1,6 +1,7 @@
 # dsh bundle patch：把知识星球工具插入 profile 层栈。
-# 用户在 profile 的 cordis.patch.yml 里按 id 覆盖配置：
+# 用户在 profile 的 cordis.patch.yml 里按 id 覆盖配置（必须同时写 name，否则该行不会命中）：
 #   - id: zsxq-tools
+#     name: dsh-plugin-zsxq
 #     config:
 #       dataDir: /path/to/your/knowledge-base
 - insert:
