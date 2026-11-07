@@ -57,18 +57,28 @@ Without it, the tools still work — the agent just follows the tool description
 1. **Initialize a data directory**
 
    Ask the agent: *“initialize the zsxq knowledge base”* → `zsxq_init` creates
-   `~/…/zsxq-kb/{channels,assets,data,index}` and a `config.json` template.
+   `$DSH_HOME/zsxq-kb/{channels,assets,data,index}` and a `config.json` template
+   (the default location; a configured `dataDir` wins).
 
 2. **Add your Cookie**
 
-   Open <https://wx.zsxq.com>, log in, `F12 → Network`, copy the `Cookie` header of any
-   `api.zsxq.com` request, and put it into `config.json`:
+   1. Open <https://wx.zsxq.com>, log in, and confirm your planets render;
+   2. `F12` → **Network** → filter `api.zsxq.com` → reload → click any request;
+   3. **Headers → Request Headers → `Cookie`** → copy the **whole** value after the colon
+      (usually `zsxq_access_token=…; abtest_env=product`; more than one pair is normal);
+   4. Write it into `config.json` in the data directory — default
+      `$DSH_HOME/zsxq-kb/config.json`, or `<dataDir>/config.json` when `dataDir` is configured:
 
    ```json
    { "zsxq_cookie": "zsxq_access_token=…; abtest_env=product", "channels": {}, "tag_to_category": {} }
    ```
 
-   The Cookie is the account credential — keep `config.json` out of Git.
+   - The Cookie is the account credential: do **not** commit it, and do **not** paste it into
+     chats, screenshots, or issues;
+   - It lasts about **a month** in practice; expiry shows up as **HTTP 401**
+     (`ZSXQ_COOKIE_EXPIRED` from the tools) — copy a fresh one and overwrite the value;
+   - Verify with `zsxq_doctor`: it makes one real API call and only reports whether the Cookie
+     works, never echoing it.
 
 3. **Pick your planets**
 

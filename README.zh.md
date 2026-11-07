@@ -62,18 +62,26 @@ dsh plugin --profile web add github:zhangcaiqian/zsxq-skill
 1. **初始化数据目录**
 
    对 agent 说：*「初始化知识星球知识库」* → `zsxq_init` 会创建
-   `~/…/zsxq-kb/{channels,assets,data,index}` 和 `config.json` 模板。
+   `$DSH_HOME/zsxq-kb/{channels,assets,data,index}` 和 `config.json` 模板
+   （默认目录；配置了 `dataDir` 时以配置为准）。
 
 2. **填 Cookie**
 
-   浏览器打开 <https://wx.zsxq.com> 扫码登录 → `F12` → **Network** → 任选一条 `api.zsxq.com`
-   请求 → 复制 `Cookie` 整串，写入 `config.json`：
+   1. 浏览器打开 <https://wx.zsxq.com> 扫码登录，确认能正常刷出星球帖子；
+   2. `F12` → **Network** → 过滤 `api.zsxq.com` → 刷新页面 → 点任意一条请求；
+   3. **Headers → Request Headers → `Cookie`**，复制冒号后的**整串**（通常形如
+      `zsxq_access_token=…; abtest_env=product`，不止一项是正常的）；
+   4. 写入数据目录下的 `config.json`：默认 `$DSH_HOME/zsxq-kb/config.json`，
+      配置了 `dataDir` 就是 `<dataDir>/config.json`：
 
    ```json
    { "zsxq_cookie": "zsxq_access_token=…; abtest_env=product", "channels": {}, "tag_to_category": {} }
    ```
 
-   Cookie 就是账号凭据，`config.json` 不要提交到 Git。
+   - Cookie 就是账号凭据：**不要**提交 Git，也**不要**贴到聊天、截图或 issue 里；
+   - 实测有效期约 **1 个月**；失效表现为 **HTTP 401**（工具会返回 `ZSXQ_COOKIE_EXPIRED`），
+     重新复制一份覆盖即可；
+   - 改完用 `zsxq_doctor` 验证：它会真实调用一次 API，只报告 Cookie 是否有效，**不回显** Cookie 内容。
 
 3. **选星球**
 
