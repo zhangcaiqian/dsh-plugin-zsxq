@@ -49,12 +49,21 @@
   },
   "scripts": {
     "test": "node --test test/*.test.mjs",
-    "golden": "node scripts/golden.mjs"
+    "golden": "node scripts/golden.mjs",
+    "prepublishOnly": "node --test test/*.test.mjs"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zhangcaiqian/dsh-plugin-zsxq.git"
   },
   "author": "zhangcaiqian",
-  "license": "MIT"
+  "license": "MIT",
+  "homepage": "https://github.com/zhangcaiqian/dsh-plugin-zsxq#readme",
+  "bugs": {
+    "url": "https://github.com/zhangcaiqian/dsh-plugin-zsxq/issues"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  }
 }
