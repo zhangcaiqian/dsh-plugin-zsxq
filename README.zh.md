@@ -1,5 +1,9 @@
 # dsh-plugin-zsxq
 
+[![npm version](https://img.shields.io/npm/v/dsh-plugin-zsxq)](https://www.npmjs.com/package/dsh-plugin-zsxq)
+[![npm downloads](https://img.shields.io/npm/dm/dsh-plugin-zsxq)](https://www.npmjs.com/package/dsh-plugin-zsxq)
+[![license](https://img.shields.io/npm/l/dsh-plugin-zsxq)](LICENSE)
+
 中文 | [English](README.md)
 
 **把你订阅的知识星球，变成一份可检索的本地 Markdown 知识库 —— 直接在 DeepSeek Harness 里完成。**
@@ -31,10 +35,10 @@
 ## 安装
 
 ```sh
-# 已发布 npm 时
+# npm（推荐）
 dsh plugin --profile web add dsh-plugin-zsxq
 
-# 现在可以直接从 GitHub 安装
+# 或从 GitHub 源码安装
 dsh plugin --profile web add github:zhangcaiqian/dsh-plugin-zsxq
 
 # 本地开发

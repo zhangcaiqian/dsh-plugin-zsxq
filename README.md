@@ -1,5 +1,9 @@
 # dsh-plugin-zsxq
 
+[![npm version](https://img.shields.io/npm/v/dsh-plugin-zsxq)](https://www.npmjs.com/package/dsh-plugin-zsxq)
+[![npm downloads](https://img.shields.io/npm/dm/dsh-plugin-zsxq)](https://www.npmjs.com/package/dsh-plugin-zsxq)
+[![license](https://img.shields.io/npm/l/dsh-plugin-zsxq)](LICENSE)
+
 [中文](README.zh.md) | English
 
 **Turn the Knowledge Planet (知识星球 / zsxq) planets you subscribe to into a searchable local Markdown knowledge base — from inside DeepSeek Harness.**
@@ -28,10 +32,10 @@ This plugin makes your own subscription local and queryable:
 ## Install
 
 ```sh
-# DSH profile (npm release once published)
+# npm (recommended)
 dsh plugin --profile web add dsh-plugin-zsxq
 
-# straight from GitHub today
+# or straight from GitHub source
 dsh plugin --profile web add github:zhangcaiqian/dsh-plugin-zsxq
 
 # local checkout while developing
